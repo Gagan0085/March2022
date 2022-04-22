@@ -1,4 +1,5 @@
 ﻿using Gagan.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace Gagan.Pages
             // Click on save button
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@id='tmsGrid']/div[4]/a[4]/span", 2);
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 2);
 
             // click on last page button
             IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
@@ -51,15 +52,19 @@ namespace Gagan.Pages
 
             // Check if record create is present in the table and expected value
             IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[3]/td[5]/a[1]"));
+            
+            // Option1
+            Assert.That(actualCode.Text == "March2022", "Actual code and excepted Code do not match");
 
-            if (actualCode.Text == "March2022")
-            {
-                Console.WriteLine("Material record created successfully, test passed.");
-            }
-            else
-            {
-                Console.WriteLine("Test failed.");
-            }
+            // Option2
+            //if (actualCode.Text == "March2022")
+            //{
+               // Assert.Pass("Material record created successfully, test passed.");
+            //}
+            //else
+            //{
+                // Assert.Fail("Test failed.");
+            //}
         }
 
         public void EditTM(IWebDriver driver)

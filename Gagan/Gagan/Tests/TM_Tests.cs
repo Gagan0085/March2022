@@ -1,4 +1,6 @@
 ﻿using Gagan.Pages;
+using Gagan.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
@@ -6,16 +8,15 @@ using System.Threading;
 
 namespace March2022.Tests
 {
-    internal class TM_Tests
+    [TestFixture]
+    internal class TM_Tests : CommonDriver
     {
-        private static object descriptionTextbox;
 
-        public static object typeCodeDropdown { get; private set; }
-
-        static void Main(string[] args)
+        [OneTimeSetUp]
+        public void LoginFunction()
         {
             // open brower
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 
             // Login page object initialization and definition
@@ -26,18 +27,41 @@ namespace March2022.Tests
             HomePage homePageObj = new HomePage();
             homePageObj.GoToTMPage(driver);
 
+        }
+
+        [Test]
+        public void CreateTM_Test()
+        {
             // TM page object initialization and definition
             TMPage tMPageObj = new TMPage();
             tMPageObj.CreateTM(driver);
 
-            // Edit TM
-            tMPageObj.EditTM(driver);
+        }
 
+        [Test]
+        public void EditTM_Test()
+        {
+            // Edit TM
+            TMPage tMPageObj = new TMPage();
+            tMPageObj.EditTM(driver);
+        }
+
+        [Test]
+        public void DeleteTM_Test()
+        {
             // Delete TM
+            TMPage tMPageObj = new TMPage();
             tMPageObj.DeleteTM(driver);
 
         }
-    }
 
+        [TearDown]
+        public void CloseTestRun()
+        {
+
+        }
+    }
+  
 }
+
    
