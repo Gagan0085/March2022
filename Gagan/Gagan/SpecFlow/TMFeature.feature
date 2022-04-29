@@ -10,3 +10,16 @@ Scenario: Create Time and Material record with valid details
 	When I navigate to Time and Material page
 	When I create a new file
 	Then the record should be created successfully
+
+Scenario Outline: edit Time and Material record with valid details
+	Given I logged into the TurnUp portal successfully
+	When I navigate to Time and Material page
+	When I update '<Description>' on a existing time and material record
+	Then the record should have the updated '<Description>'
+	
+
+	 Examples: 
+	 Description
+	 Time
+	 Material
+	 EditedRecord

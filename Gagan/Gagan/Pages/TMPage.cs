@@ -50,21 +50,31 @@ namespace Gagan.Pages
             goToLastPageButton.Click();
             Thread.Sleep(1000);
 
-            // Check if record create is present in the table and expected value
-            IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[3]/td[5]/a[1]"));
             
-            // Option1
-            Assert.That(actualCode.Text == "March2022", "Actual code and excepted Code do not match");
+        }
 
-            // Option2
-            //if (actualCode.Text == "March2022")
-            //{
-               // Assert.Pass("Material record created successfully, test passed.");
-            //}
-            //else
-            //{
-                // Assert.Fail("Test failed.");
-            //}
+         public string GetCode(IWebDriver driver)
+        {
+            IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[8]/td[1]"));
+            return actualCode.Text;
+        }
+
+        public string GetTypeCode(IWebDriver driver)
+        {
+            IWebElement actualTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[8]/td[2]"));
+            return actualTypeCode.Text;
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[8]/td[3]"));
+            return actualDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[8]/td[4]"));
+            return actualPrice.Text;
         }
 
         public void EditTM(IWebDriver driver)
